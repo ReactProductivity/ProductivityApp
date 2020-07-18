@@ -3,15 +3,16 @@
     left: 0px;
     width:200px;
     height:100%;
-    background:#00FFA4;
+    /* background:#00ff99;  */
+    background: #c1f0c1;
   }
   
-  #sidebarLi{
+  /* #sidebarLi{
     color: rgba(0, 0, 0, 0.9);
     list-style:none;
     padding: 15px 10px;
     border-bottom: 1px solid rgba(100, 100, 100, 0.9);
-  }
+  } */
   
   #sidebar .toggle{
     position:absolute;
@@ -31,11 +32,27 @@
     left:-200px;
   }
 
+  #friendsHeader{
+
+  }
+
   #addFriend{
     margin-top: 5px;
-    margin-bottom: 5px;
-    margin-right: 5px;
+    margin-left: 50%;
+  }
 
+  #friendsText{
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 5px;
+    font-size: 175%;
+  }  
+
+  #searchFriend{
+    margin-bottom: 5px;
+  }
+  
+  #separate{
+    margin-top:-10px;
   }
   
   

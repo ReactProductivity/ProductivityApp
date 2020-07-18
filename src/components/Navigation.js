@@ -5,6 +5,7 @@ import {Person} from './Person';
 export class Navigation extends Component{
 
     render(){
+        const friends = ["Ishaan", "Keerat", "Harmeen"]
         return(
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand href="#home">Productivity App</Navbar.Brand>
@@ -13,7 +14,7 @@ export class Navigation extends Component{
                     <Nav className="mr-auto">
                         <Nav.Link href="">Home</Nav.Link>
                         <Nav.Link href="">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown title="Contact" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>

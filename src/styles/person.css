@@ -1,0 +1,16 @@
+#personLi{
+    margin-bottom: 5px;
+    background: #c1f0c1;
+}
+
+#avatar{
+    height: 30px;
+    width: 30px;
+}
+
+#profileName{
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    margin-left: -50px;
+    margin-top: 2%;
+}

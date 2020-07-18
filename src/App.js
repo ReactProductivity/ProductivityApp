@@ -5,10 +5,11 @@ import { Navigation } from './components/Navigation';
 import { FriendsBar } from './components/FriendsBar';
 
 function App() {
+  const initialFriends = ["Keerat", "Ishaan", "Harmeen"];
   return (
     <div>
       <Navigation/>
-      <FriendsBar/>
+      <FriendsBar initialFriends={initialFriends}/>
     </div>
   );
 }
