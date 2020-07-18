@@ -38,7 +38,10 @@ export class FriendsBar extends Component {
                     <span></span>
                     <span></span>
                 </div>
-                <button id="addFriend" onClick={() => this.addFriend("Kee")} >+</button>
+                <div id="friendsHeader">
+                    <Button id="addFriend" variant="dark" onClick={() => this.addFriend("Kee")}>Add Friend +</Button>
+                    <p>Friends</p>
+                </div>
                 <ListGroup id="friendslist">
                     <div className="friends">
                         {this.state.friends.map((name) => {

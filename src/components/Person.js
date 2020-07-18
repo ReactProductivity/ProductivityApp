@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 export class Person extends Component{
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {};
     }
 
     render(){
