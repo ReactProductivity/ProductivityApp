@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, Form, FormControl, Button, NavDropdown} from 'react-bootstrap'
+import {Person} from './Person';
 
 export class Navigation extends Component{
+
     render(){
         return(
             <Navbar bg="light" expand="lg">
@@ -25,6 +27,7 @@ export class Navigation extends Component{
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
+
         )
     }
 }

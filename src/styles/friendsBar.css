@@ -3,11 +3,10 @@
     left: 0px;
     width:200px;
     height:100%;
-    top:50px;
     background:#00FFA4;
   }
   
-  #sidebar ul li{
+  #sidebarLi{
     color: rgba(0, 0, 0, 0.9);
     list-style:none;
     padding: 15px 10px;
@@ -27,9 +26,13 @@
     background:#151719;
     margin: 3px 0px;
   }
-  
+
   #sidebar.active{
     left:-200px;
+  }
+
+  #addFriend{
+
   }
   
   
