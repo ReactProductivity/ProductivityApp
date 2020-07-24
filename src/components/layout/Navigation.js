@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, Form, FormControl, Button, NavDropdown} from 'react-bootstrap'
+import {Navbar, Nav, Form, FormControl, Button, NavDropdown, Image} from 'react-bootstrap'
 import {Person} from './Person';
 import {Link} from 'react-router-dom'
+import Logo from '../../images/logo.png'
+import "../../styles/navigation.css";
 
 export class Navigation extends Component{
 
@@ -9,7 +11,8 @@ export class Navigation extends Component{
         const friends = ["Ishaan", "Keerat", "Harmeen"]
         return(
             <Navbar bg="light" expand="lg" id="navbar">
-                <Navbar.Brand href="#home" >Productivity App</Navbar.Brand>
+                <Navbar.Brand href="#home" ><Image id="logo" src={Logo} /></Navbar.Brand>
+                <Navbar.Brand href="#home" id="logo-text">Productivity App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">

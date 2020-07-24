@@ -36,3 +36,10 @@
 ::placeholder{
     font-family: 'Courier New', Courier, monospace;
 }
+
+#sign-up-button{
+    font-family: 'Courier New', Courier, monospace;
+    background: #c1f0c1;
+    color: black;
+    border: none;
+}
