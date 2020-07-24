@@ -11,6 +11,15 @@
 #profileName{
     font-family: 'Courier New', Courier, monospace;
     color: black;
-    margin-left: -50px;
+    margin-left: -20px;
     margin-top: 2%;
+}
+
+#dot{
+    height: 10px;
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 20px;
 }
