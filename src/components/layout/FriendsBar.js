@@ -7,27 +7,40 @@ import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import {Person} from './Person';
 import ListGroup from 'react-bootstrap/ListGroup';
+import addFriend from '../../store/actions/friendActions';
+import {connect} from 'react-redux';
+import {compose} from 'redux'
+import { firestoreConnect } from 'react-redux-firebase';
 
-export class FriendsBar extends Component {
+class FriendsBar extends Component {
 
     constructor(props){
         super(props);
-        this.state = {friends:[], filtered:[]};
+        this.state = {friends:[]};
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount() {
-        /* initial friends from database when you login */
-        const friends = this.props.initialFriends.slice();
-        const filtered = this.props.initialFriends.slice();
-        this.setState({friends, filtered});
+    // componentDidMount() {
+    //     /* initial friends from database when you login */
+    //     //console.log(this.props.initialFriends);
+    //     // console.log(friends);
+    //     // this.setState({friends});
+    // }
+    static getDerivedStateFromProps(props, state) {
+        if (props.initialFriends !== state.friends) {
+          return {
+            friends: props.initialFriends,
+          };
+        }
+        return null;
     }
 
     addFriend(name){
         const newList = this.state.friends.slice();
         const newList2 = this.state.friends.slice();
-        newList.push(name);
+        newList.push({name: name});
         newList2.push(name);
+        this.props.addFriend(name);
         this.setState({friends:newList, filtered:newList2});
     }
 
@@ -54,7 +67,7 @@ export class FriendsBar extends Component {
     }
 
     render() {
-        let status =["online", "offline"]
+        console.log(this.state.friends)
         return (
             <>
             <Container id="sidebar">
@@ -84,9 +97,9 @@ export class FriendsBar extends Component {
 
                 <ListGroup >
                     <div id="friendList">
-                        {this.state.friends.map((friend) => {
+                        {this.state.friends && this.state.friends.map((friend) => {
                             return(
-                                <Person key={friend} name={friend} status={"online"} ></Person>
+                                <Person key={friend.id} name={friend.name} status={"online"} ></Person>
                             );
                         })}
                     </div>
@@ -97,3 +110,20 @@ export class FriendsBar extends Component {
         )
     }
 }
+
+const addFriendsListToProps = (state) => {
+    return{
+        initialFriends: state.firestore.ordered.friends
+    }
+}
+
+const addDispatchtoProps = (dispatch) => {
+    return {
+        addFriend: (friend) => dispatch(addFriend(friend))
+    }
+}
+
+export default compose(
+    firestoreConnect(() => ['friends']),
+    connect(addFriendsListToProps, addDispatchtoProps)
+    )(FriendsBar)
