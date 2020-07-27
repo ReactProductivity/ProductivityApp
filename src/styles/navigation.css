@@ -7,3 +7,18 @@
     height: 30px;
     width: 30px;
 }
+
+#register-btn{
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}
+
+#login-btn{
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}
+
+#logout-btn{
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}

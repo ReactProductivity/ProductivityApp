@@ -2,6 +2,11 @@
     margin-top: 20px;
 }
 
+/* #login-text{
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 200%;
+} */
+
 #email{
    width:35%;
    margin-left:32.5%;
@@ -12,17 +17,17 @@
     margin-left:32.5%;
  }
 
- #email-label{
+#email-label{
     font-family: 'Courier New', Courier, monospace;
     font-size: 125%;
- }
+}
  
- #password-label{
+#password-label{
     font-family: 'Courier New', Courier, monospace;
     font-size: 125%;
-  }
+}
 
- ::placeholder{
+::placeholder{
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -31,4 +36,18 @@
     background: #c1f0c1;
     color: black;
     border: none;
+    margin-bottom: 10px;
+}
+
+#login-failed {
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 100%;
+   margin-top: 20px;
+   color: red;
+}
+
+#sign-up-tag{
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 90%;
+   margin-top: 100px;
 }

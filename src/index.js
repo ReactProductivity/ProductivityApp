@@ -11,6 +11,8 @@ import {reduxFirestore, getFirestore, createFirestoreInstance} from "redux-fires
 import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import firebaseConfig from "./components/config/firebaseConfig";
 import firebase from "firebase/app";
+import { useSelector  } from 'react-redux'
+import { isLoaded  } from 'react-redux-firebase';
 
 const store = createStore(
   rootReducer,
@@ -27,10 +29,19 @@ const rrfProps = {
   createFirestoreInstance
 };
 
+function AuthIsLoaded({ children }) {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth)) return <div></div>;
+      return children
+}
+
+
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
+      <AuthIsLoaded>
+        <App />
+      </AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("root")

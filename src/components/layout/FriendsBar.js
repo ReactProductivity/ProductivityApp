@@ -11,6 +11,7 @@ import addFriend from '../../store/actions/friendActions';
 import {connect} from 'react-redux';
 import {compose} from 'redux'
 import { firestoreConnect } from 'react-redux-firebase';
+import {Redirect} from 'react-router-dom';
 
 class FriendsBar extends Component {
 
@@ -67,7 +68,13 @@ class FriendsBar extends Component {
     }
 
     render() {
-        console.log(this.state.friends)
+        // redirect to login page if not logged in
+        if(!this.props.auth.uid){
+            return(
+                <Redirect to="/login" />
+            )
+        }
+
         return (
             <>
             <Container id="sidebar">
@@ -113,7 +120,8 @@ class FriendsBar extends Component {
 
 const addFriendsListToProps = (state) => {
     return{
-        initialFriends: state.firestore.ordered.friends
+        initialFriends: state.firestore.ordered.friends,
+        auth: state.firebase.auth
     }
 }
 
