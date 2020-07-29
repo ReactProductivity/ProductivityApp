@@ -1,9 +1,5 @@
 const initialState = {
-    initialFriends: [
-        {name: "Keerat"},
-        {name: "Ishaan"},
-        {name: "Harmeen"}
-    ]
+    
 };
 
 const friendReducer = (state = initialState, action) => {

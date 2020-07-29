@@ -32,14 +32,14 @@ class FriendsBar extends Component {
   //     // this.setState({friends});
   // }
 
-  //   static getDerivedStateFromProps(props, state) {
-  //     if (props.initialFriends !== state.friends) {
-  //       return {
-  //         friends: props.initialFriends,
-  //       };
-  //     }
-  //     return null;
-  //   }
+    static getDerivedStateFromProps(props, state) {
+      if (props.initialFriends !== state.friends) {
+        return {
+          friends: props.initialFriends,
+        };
+      }
+      return null;
+    }
 
   // addFriend(name){
   //     const newList = this.state.friends.slice();
@@ -177,8 +177,8 @@ class FriendsBar extends Component {
                 this.state.filtered.map((friend) => {
                   return (
                     <Person
-                      key={friend.id}
-                      name={friend.name}
+                      key={friend}
+                      name={friend}
                       status={"online"}
                     ></Person>
                   );
@@ -193,7 +193,7 @@ class FriendsBar extends Component {
 
 const addFriendsListToProps = (state) => {
   return {
-    initialFriends: state.firestore.ordered.friends,
+    initialFriends: state.firebase.profile.friends,
     auth: state.firebase.auth,
   };
 };
@@ -204,7 +204,9 @@ const addDispatchtoProps = (dispatch) => {
   };
 };
 
-export default compose(
-  firestoreConnect(() => ["friends"]),
-  connect(addFriendsListToProps, addDispatchtoProps)
-)(FriendsBar);
+// export default compose(
+//   firestoreConnect(() => ["friends"]),
+//   connect(addFriendsListToProps, addDispatchtoProps)
+// )(FriendsBar);
+
+export default connect(addFriendsListToProps,addDispatchtoProps)(FriendsBar)

@@ -14,11 +14,18 @@ class Navigation extends Component{
     }
 
     render(){
-        const signedin = <><Nav.Link id="logout-btn" onClick={this.props.logout}>Logout</Nav.Link><Image id="logo" src={Avatar} roundedCircle/></>;
-        const signedout = <><Nav.Link as={Link} to='/login' id="login-btn">Login</Nav.Link>
-                            <Nav.Link as={Link} to='/register' id="register-btn">Sign-up</Nav.Link>
-                            
-                            </>
+        const name = this.props.profile.firstname + " " + this.props.profile.lastname
+        const signedin = <>
+                            <NavDropdown alignRight title={<Image id="avatar" src={Avatar} roundedCircle />}>
+                                <NavDropdown.Item id="profile-name">{name}</NavDropdown.Item>
+                                <NavDropdown.Divider/>
+                                <NavDropdown.Item id="logout" onClick={this.props.logout}>Logout</NavDropdown.Item>
+                            </NavDropdown>                     
+                        </>;
+        const signedout=<>  
+                            <Nav.Link as={Link} to='/login' id="login-btn">Login</Nav.Link>
+                            {/* <Nav.Link as={Link} to='/register' id="register-btn">Sign-up</Nav.Link> */}
+                        </>
         const checkLogin = this.props.auth.uid ? signedin : signedout
 
         return(
@@ -27,14 +34,13 @@ class Navigation extends Component{
                     <Image id="logo" src={Logo} />
                 </Navbar.Brand>
                 <Navbar.Brand> 
-                    <NavLink to="/" id="logo-text">Productivity App</NavLink>
+                    <NavLink to="/" id="logo-text" style={{ color: 'inherit', textDecoration: 'inherit'}}>Productivity App</NavLink>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        {/* <Nav.Link href="">Home</Nav.Link>
-                        <Nav.Link href="">Link</Nav.Link>
-                        <NavDropdown title="Contact" id="basic-nav-dropdown">
+                        <Nav.Link as={Link} to='/contact' id="content-page">Contact</Nav.Link>
+                        {/* <NavDropdown title="Contact" id="basic-nav-dropdown">
                             <NavDropdown.Item> <Link to="/">Action</Link></NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
@@ -42,7 +48,9 @@ class Navigation extends Component{
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown> */}
                     </Nav>
-                    {checkLogin}
+                    <Nav>
+                        {checkLogin}
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
 
@@ -51,9 +59,10 @@ class Navigation extends Component{
 }
 
 const addStatetoProps = (state) => {
-    // console.log(state)
+    console.log(state)
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 
