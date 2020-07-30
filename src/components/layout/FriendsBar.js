@@ -134,16 +134,16 @@ class FriendsBar extends Component {
 
                 <ListGroup>
                     <div id="friendList">
-                    {this.state.filtered &&
-                        this.state.filtered.map((friend) => {
-                        return (
-                            <Person
-                            key={friend}
-                            name={friend}
-                            status={"online"}
-                            ></Person>
-                        );
-                        })}
+                        {this.state.filtered &&
+                            this.state.filtered.map((friend) => {
+                            return (
+                                <Person
+                                key={friend}
+                                name={friend}
+                                status={"online"}
+                                ></Person>
+                            );
+                            })}
                     </div>
                 </ListGroup>
             </Container>

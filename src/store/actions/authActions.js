@@ -42,17 +42,4 @@ export const register = (fields) => {
     }
 }
 
-const isLoggedIn = (uid) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        // here is the async call to firebase
-        const firebase = getFirebase();
-        firebase.auth().add({
-           name: friend
-        }).then(() => {
-            dispatch({type: 'ADD_FRIEND', friend});
-        }).catch((error) => {
-            dispatch({type: 'ADD_FRIEND_ERROR', error});
-        })
-    }
-}
 
