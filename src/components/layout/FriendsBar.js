@@ -24,19 +24,11 @@ class FriendsBar extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
     }
-
-  // addFriend(name){
-  //     const newList = this.state.friends.slice();
-  //     const newList2 = this.state.friends.slice();
-  //     newList.push({name: name});
-  //     newList2.push(name);
-  //     this.props.addFriend(name);
-  //     this.setState({friends:newList, filtered:newList2});
-  // }
     componentWillReceiveProps(nextProps){
         console.log("HERe")
         this.setState({ friends: nextProps.initialFriends, filtered: nextProps.initialFriends })
     }   
+
   /* filtered ->  what is displayed on friendsbar
        friends -> what keeps track of list of friends */
     addFriend(name) {
@@ -69,24 +61,6 @@ class FriendsBar extends Component {
     toggleFriendsBar() {
         document.getElementById("sidebar").classList.toggle("active");
     }
-
-  // handleChange(input){
-  //     let copyList = this.state.friends.slice();
-  //     let filteredList = [];
-
-  //     if (input.target.value === ""){
-  //        filteredList = this.state.filtered;
-  //     }
-  //     else{
-  //         filteredList = copyList.filter(item => {
-  //             const lc = item.toLowerCase();
-  //             const filter = input.target.value.toLowerCase();
-  //             return lc.includes(filter);
-  //         });
-
-  //     }
-  //     this.setState({friends:filteredList});
-  // }
 
     handleChange(input) {
         let currSearch = input.target.value;
@@ -131,30 +105,30 @@ class FriendsBar extends Component {
 
                 <Row>
                     <Col>
-                    <p id="friendsText">FRIENDS</p>
+                        <p id="friendsText">FRIENDS</p>
                     </Col>
                     <Col>
-                    <Button
-                        id="addFriend"
-                        variant="dark"
-                        onClick={() =>
-                        this.addFriend(document.getElementById("searchFriend").value)
-                        }
-                    >
-                        +
-                    </Button>
+                        <Button
+                            id="addFriend"
+                            variant="dark"
+                            onClick={() =>
+                            this.addFriend(document.getElementById("searchFriend").value)
+                            }
+                        >
+                            +
+                        </Button>
                     </Col>
                 </Row>
                 <hr id="separate"></hr>
                 <Row>
                     <Col>
-                    <Form>
-                        <Form.Control
-                        id="searchFriend"
-                        placeholder={this.state.currentFunction}
-                        onChange={this.handleChange}
-                        />
-                    </Form>
+                        <Form>
+                            <Form.Control
+                            id="searchFriend"
+                            placeholder={this.state.currentFunction}
+                            onChange={this.handleChange}
+                            />
+                        </Form>
                     </Col>
                 </Row>
 

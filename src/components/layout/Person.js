@@ -50,5 +50,5 @@ export class Person extends Component{
             </ListGroup.Item>
         )
     }
-    
 }
+
