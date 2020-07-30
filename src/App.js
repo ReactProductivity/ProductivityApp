@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 //import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from './components/layout/Navigation';
-import FriendsBar from './components/layout/FriendsBar';
-import { BrowserRouter, Switch, Route} from 'react-router-dom'
-import Login from "./components/auth/Login"
-import Register from "./components/auth/Register"
+import Navigation from "./components/layout/Navigation";
+import { MainContent } from "./components/layout/MainContent";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 function App() {
   /* this is where we initial friends for user based from database for the logged in user*/
@@ -13,9 +13,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navigation/>
+        <Navigation />
         <Switch>
-          <Route exact path="/" component={FriendsBar}/>
+          <Route exact path="/" component={MainContent} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </Switch>
