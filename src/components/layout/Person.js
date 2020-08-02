@@ -4,35 +4,46 @@ import Image from 'react-bootstrap/Image';
 import Avatar from '../../images/profile_avatar2.jpg';
 import "../../styles/person.css";
 import { Row, Col } from 'react-bootstrap';
+import { connect } from "react-redux";
+
 
 
 export class Person extends Component{
     constructor(props){
         super(props);
         this.state = {status:""};
+        this.getStatusColor = this.getStatusColor.bind(this);
     }
 
     componentDidMount(){
         /* fetch state here */ 
-        // this.setState({status:"online"});
+        
+        this.props.isLoggedIn(this.props.uid);
+        if(this.props.online){
+            this.setState({status:"online"});
+        }
+        else{
+            this.setState({status:"offline"});
+        }
+      
     }
 
-
-    // getStatusColor() {
-    //     switch(this.state.status) {
-    //         case "offline": return "red";
-    //         case "online": return "green";
-    //         case "away": return "yellow";
-    //     }
-    // }
+    getStatusColor() {
+        switch(this.state.status) {
+            case "offline": return "red";
+            case "online": return "green";
+        }
+    }
 
     render(){
-        let color = 'green';
-        if(this.props.status === 'offline'){
-          color = 'red';
-        } else if (this.props.status === 'away') {
-          color = 'yellow';
-        }
+        // this.props.isLoggedIn(this.props.uid);
+        // if(this.props.online){
+        //     this.setState({status:"online"});
+        // }
+        // else{
+        //     this.setState({status:"offline"});
+        // }
+        console.log(this.state)
 
         return(
             <ListGroup.Item action variant="success" id="personLi" >
@@ -41,10 +52,10 @@ export class Person extends Component{
                         <Image id="avatar" src={Avatar} roundedCircle />
                     </Col>
                     <Col id="profileName">
-                        {this.props.name}
+                        {this.props.uid}
                     </Col>
                     <Col>
-                        <span id="dot" style={{backgroundColor: color}}></span>
+                        <span id="dot" style={{backgroundColor: this.getStatusColor()}}></span>
                     </Col>
                 </Row>
             </ListGroup.Item>
@@ -52,3 +63,11 @@ export class Person extends Component{
     }
 }
 
+
+// const addDispatchtoProps = (dispatch) => {
+//     return {
+//         isLoggedIn: (uid) => dispatch(isLoggedIn(uid))
+//     }
+// }
+
+export default Person

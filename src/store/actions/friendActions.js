@@ -9,6 +9,7 @@ const addFriend = (friend) => {
         }).catch((error) => {
             dispatch({type: 'ADD_FRIEND_ERROR', error});
         })
+
     }
 }
 

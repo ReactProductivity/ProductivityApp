@@ -1,5 +1,6 @@
 const initialState = {
-    authError: null
+    authError: null,
+    online: false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -9,7 +10,6 @@ const authReducer = (state = initialState, action) => {
             ...state,
             authError: null
         }
-
     }
     if (action.type === 'LOGIN_FAILED'){
         console.log('login failed');
@@ -33,6 +33,20 @@ const authReducer = (state = initialState, action) => {
         return {
             ...state,
             authError: "User creation failed"
+        }
+    }
+    if(action.type === 'online'){
+        console.log('user online');
+        return {
+            ...state,
+            online: true
+        }
+    }
+    if(action.type === 'offline'){
+        console.log('user offline');
+        return {
+            ...state,
+            online: false
         }
     }
     return state;

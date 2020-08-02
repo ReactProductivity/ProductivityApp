@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Redirect } from "react-router-dom";
+import {isLoggedIn} from '../../store/actions/authActions';
 
 class FriendsBar extends Component {
     constructor(props) {
@@ -25,7 +26,6 @@ class FriendsBar extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
     componentWillReceiveProps(nextProps){
-        console.log("HERe")
         this.setState({ friends: nextProps.initialFriends, filtered: nextProps.initialFriends })
     }   
 
@@ -92,7 +92,6 @@ class FriendsBar extends Component {
         if (!this.props.auth.uid) {
             return <Redirect to="/login" />;
         }
-        console.log("HERE 4")
         console.log(this.state.filtered)
         return (
             <>
@@ -136,12 +135,16 @@ class FriendsBar extends Component {
                     <div id="friendList">
                         {this.state.filtered &&
                             this.state.filtered.map((friend) => {
+                           
                             return (
                                 <Person
-                                key={friend}
-                                name={friend}
-                                status={"online"}
-                                ></Person>
+                                    key={friend}
+                                    name={friend}
+                                    uid={friend}
+                                    isLoggedIn = {this.props.isLoggedIn}
+                                    auth = {this.props.online}
+                                >
+                                </Person>
                             );
                             })}
                     </div>
@@ -156,12 +159,14 @@ const addFriendsListToProps = (state) => {
   return {
     initialFriends: state.firebase.profile.friends,
     auth: state.firebase.auth,
+    online: state.auth.online,
   };
 };
 
 const addDispatchtoProps = (dispatch) => {
   return {
     addFriend: (friend) => dispatch(addFriend(friend)),
+    isLoggedIn: (uid) => dispatch(isLoggedIn(uid))
   };
 };
 

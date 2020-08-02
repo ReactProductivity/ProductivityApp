@@ -4,6 +4,7 @@ import "../../styles/register.css";
 import {connect} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
 import {register} from '../../store/actions/authActions'
+import fire from '../config/firebaseConfig'
 
 class Register extends Component{
     constructor(props){
@@ -23,6 +24,7 @@ class Register extends Component{
     handleSubmit(e){
         e.preventDefault();
         this.props.register(this.state);
+        // fire.database().ref("status").push(this.state);
     }
 
     render(){
