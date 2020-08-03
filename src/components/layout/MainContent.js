@@ -2,6 +2,7 @@ import FriendsBar from "./FriendsBar";
 import Content from "./Content";
 import React, { Component } from "react";
 import { Tabs } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 import { Tab, Container } from "react-bootstrap";
 
 export class MainContent extends Component {
@@ -10,9 +11,12 @@ export class MainContent extends Component {
   }
 
   render() {
+    if (this.props.auth.uid) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div>
-        <FriendsBar />
+        <FriendsBar  />
         <Container>
           <Tabs
             defaultActiveKey="profile"

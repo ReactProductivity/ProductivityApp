@@ -19,7 +19,7 @@ class Navigation extends Component{
                             <NavDropdown alignRight title={<Image id="avatar" src={Avatar} roundedCircle />}>
                                 <NavDropdown.Item id="profile-name">{name}</NavDropdown.Item>
                                 <NavDropdown.Divider/>
-                                <NavDropdown.Item id="logout" onClick={this.props.logout}>Logout</NavDropdown.Item>
+                                <NavDropdown.Item active id="logout" onClick={this.props.logout}>Logout</NavDropdown.Item>
                             </NavDropdown>                     
                         </>;
         const signedout=<>  
@@ -59,7 +59,7 @@ class Navigation extends Component{
 }
 
 const addStatetoProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
         auth: state.firebase.auth,
         profile: state.firebase.profile

@@ -2,27 +2,68 @@ import React from "react";
 import "./App.css";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./components/layout/Navigation";
-import { MainContent } from "./components/layout/MainContent";
+import FriendsBar from "./components/layout/FriendsBar";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import { getFirebase } from "react-redux-firebase";
+import { connect } from "react-redux";
 
-function App() {
-  /* this is where we initial friends for user based from database for the logged in user*/
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render(){
+    /* this is where we initial friends for user based from database for the logged in user*/
+      if (this.props.auth.uid) {
+          //console.log(this.props)
+          const firebase = getFirebase().database();
+          const uid = getFirebase().auth().currentUser.uid;
+          const onlineRef = firebase.ref('.info/connected'); // Get a reference to the list of connections
 
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Navigation />
-        <Switch>
-          <Route exact path="/" component={MainContent} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+          var isOfflineForDatabase = {
+            state: 'offline',
+            last_changed: getFirebase().database.ServerValue.TIMESTAMP,
+          };
+          
+          var isOnlineForDatabase = {
+              state: 'online',
+              last_changed: getFirebase().database.ServerValue.TIMESTAMP,
+          };
+
+          onlineRef.on('value', snapshot => {
+          
+            firebase
+              .ref(`/status/${uid}`)
+              .onDisconnect() // Set up the disconnect hook
+              .set(isOfflineForDatabase) // The value to be set for this key when the client disconnects
+              .then(() => {
+                  firebase.ref(`/status/${uid}`).set(isOnlineForDatabase);
+              });
+            
+          });
+      }
+
+      return (
+        <BrowserRouter>
+          <div className="App">
+            <Navigation />
+            <Switch>
+              <Route exact path="/" component={FriendsBar} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      );
+  }
 }
 // import { import } from '@babel/types';
 
-export default App;
+const addAppToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(addAppToProps)(App)

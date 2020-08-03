@@ -4,28 +4,7 @@ export const login = (creds) => {
         firebase.auth().signInWithEmailAndPassword(
             creds.email,
             creds.password
-        ).then((resp) => {
-            var userStatusDatabaseRef = firebase.database().ref('status/' + resp.user.uid);
-            var isOfflineForDatabase = {
-                state: 'offline',
-                last_changed: firebase.database.ServerValue.TIMESTAMP,
-            };
-            
-            var isOnlineForDatabase = {
-                state: 'online',
-                last_changed: firebase.database.ServerValue.TIMESTAMP,
-            };
-            firebase.database().ref('.info/connected').on('value', function(snapshot) {
-                // If we're not currently connected, don't do anything.
-                if (snapshot.val() == false) {
-                    return;
-                };
-        
-                userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
-                    userStatusDatabaseRef.set(isOnlineForDatabase);
-                });
-            });
-        }).then(() => {
+        ).then(() => {
             dispatch({type: 'LOGIN_SUCCESS'})
         }).catch((error) => {
             dispatch({type: 'LOGIN_FAILED', error})
@@ -36,7 +15,16 @@ export const login = (creds) => {
 export const logout = () => {
     return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
-        firebase.auth().signOut().then(() => {
+        const currUser = firebase.auth().currentUser.uid;
+        var isOfflineForDatabase = {
+            state: 'offline',
+            last_changed: getFirebase().database.ServerValue.TIMESTAMP,
+          };
+        firebase.auth().signOut(
+        ).then(() => {
+            console.log("CHANGED STAUS", currUser)
+            firebase.database().ref(`/status/${currUser}`).set(isOfflineForDatabase)
+        }).then(() => {
             dispatch({type: "LOGOUT_SUCCESS"})
         })
     }
@@ -54,14 +42,16 @@ export const register = (fields) => {
                 firstname: fields.firstname,
                 lastname: fields.lastname,
                 username: fields.username,
-                uid: resp.user.uid
+                uid: resp.user.uid,
             })
-            firebase.database().ref('status/' + resp.user.uid).set({
-                firstname: fields.firstname,
-                lastname: fields.lastname,
-                username: fields.username,
-                uid: resp.user.uid
-            });
+            // firebase.database().ref('status/' + resp.user.uid).set({
+            //     firstname: fields.firstname,
+            //     lastname: fields.lastname,
+            //     username: fields.username,
+            //     uid: resp.user.uid,
+            //     state: 'online',
+            //     last_changed: null
+            // });
         }).then(() => {
             dispatch({type: 'USER_CREATED'})
         }).catch(error => {
@@ -73,14 +63,19 @@ export const register = (fields) => {
 export const isLoggedIn = (uid) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         // here is the async call to firebase
-        const firebase = getFirebase();
-        var userStatusDatabaseRef = firebase.database().ref('status/' + uid).state;
-        if (userStatusDatabaseRef == "online"){
-            dispatch({type: "online"})
-        }
-        else if(userStatusDatabaseRef == "offline"){
-            dispatch({type: "offline"})
-        }
+        const firestore = getFirestore();
+        const usersRef = firestore.collection('users').doc(uid);
+        usersRef.get(            
+        ).then((resp) => {
+            if(resp.data().online){
+                dispatch({type: 'online'})
+            }
+            else{
+                dispatch({type: 'offline'})
+
+            }
+            // dispatch({type:resp.data().online})
+        })
         
     }
 }

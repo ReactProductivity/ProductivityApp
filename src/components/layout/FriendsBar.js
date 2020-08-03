@@ -22,12 +22,45 @@ class FriendsBar extends Component {
             filtered: [],
             currentSearch: "",
             currentFunction: "Find friend...",
+            names: []
         };
+        //console.log(this.props)
         this.handleChange = this.handleChange.bind(this);
     }
+
     componentWillReceiveProps(nextProps){
-        this.setState({ friends: nextProps.initialFriends, filtered: nextProps.initialFriends })
+        this.setState({ friends: nextProps.initialFriends, filtered: nextProps.initialFriends})
     }   
+
+    componentDidMount(){
+        // console.log(this.props.initialFriends)
+        this.setState({friends: this.props.initialFriends})
+        //console.log(this.props.initialFriends)
+    }
+
+    componentDidUpdate(prevProps){
+        // compare friends to check for changes from redux
+        // if changes have occured then get names of all the  friends and push to names state
+        if((prevProps.initialFriends !== this.props.initialFriends) && (this.props.initialFriends !== undefined)){
+            let getNames = []
+            var i = 0;
+            var j= 0;
+            for (i = 0; i < this.props.initialFriends.length; i++) {
+                // console.log(this.props.initialFriends[i])
+                let name = ""
+                for (j = 0; j < this.props.users.length; j++){
+                    if(this.props.users[i].uid === this.props.initialFriends[i]){
+                        name = this.props.users[i].firstname;
+                        // console.log(name)
+                        getNames.push(name)
+                        break;
+                    }
+                }
+            }
+            console.log(getNames)
+            this.setState({names: getNames})
+        }
+    }
 
   /* filtered ->  what is displayed on friendsbar
        friends -> what keeps track of list of friends */
@@ -64,7 +97,8 @@ class FriendsBar extends Component {
 
     handleChange(input) {
         let currSearch = input.target.value;
-        let currFriendsList = [...this.state.friends];
+        let currFriendsList = [...this.state.names];
+        console.log(currFriendsList)
         let filteredList = [...this.state.filtered];
         if (input.target.value === "") {
             if (this.state.currentFunction === "Add friend...")
@@ -92,7 +126,18 @@ class FriendsBar extends Component {
         if (!this.props.auth.uid) {
             return <Redirect to="/login" />;
         }
-        console.log(this.state.filtered)
+        
+        //console.log(this.props)
+        // let getNames = []
+        // var i = 0;
+        // if(this.state.friends !== undefined){
+        //     for (i = 0; i < this.state.friends.length; i++) {
+        //         let item = this.state.friends[i];
+        //         getNames.push(this.props.users.this.state.friends[i].firstname);
+        //     }
+        // }
+        // console.log(getNames)
+            
         return (
             <>
             <Container id="sidebar">
@@ -130,22 +175,31 @@ class FriendsBar extends Component {
                         </Form>
                     </Col>
                 </Row>
-
                 <ListGroup>
                     <div id="friendList">
-                        {this.state.filtered &&
+                        {/* {this.state.filtered &&
                             this.state.filtered.map((friend) => {
-                           
                             return (
                                 <Person
                                     key={friend}
                                     name={friend}
                                     uid={friend}
                                     isLoggedIn = {this.props.isLoggedIn}
-                                    auth = {this.props.online}
                                 >
                                 </Person>
                             );
+                            })} */}
+                        {this.props.initialFriends &&
+                            this.props.initialFriends.map((friend, index) => {
+                                return (
+                                    <Person
+                                        key={friend}
+                                        name={this.state.names[index]}
+                                        uid={friend}
+                                        isLoggedIn = {this.props.isLoggedIn}
+                                    >
+                                    </Person>
+                                );
                             })}
                     </div>
                 </ListGroup>
@@ -156,11 +210,12 @@ class FriendsBar extends Component {
 }
 
 const addFriendsListToProps = (state) => {
-  return {
-    initialFriends: state.firebase.profile.friends,
-    auth: state.firebase.auth,
-    online: state.auth.online,
-  };
+    console.log(state)
+    return {
+        initialFriends: state.firebase.profile.friends,
+        auth: state.firebase.auth,
+        users: state.firestore.ordered.users
+    };
 };
 
 const addDispatchtoProps = (dispatch) => {
@@ -170,9 +225,9 @@ const addDispatchtoProps = (dispatch) => {
   };
 };
 
-// export default compose(
-//   firestoreConnect(() => ["friends"]),
-//   connect(addFriendsListToProps, addDispatchtoProps)
-// )(FriendsBar);
+export default compose(
+    firestoreConnect(() => ["users"]),
+    connect(addFriendsListToProps, addDispatchtoProps)
+)(FriendsBar);
 
-export default connect(addFriendsListToProps,addDispatchtoProps)(FriendsBar)
+// export default connect(addFriendsListToProps,addDispatchtoProps)(FriendsBar)
