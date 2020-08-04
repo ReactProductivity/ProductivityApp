@@ -26,6 +26,7 @@ class FriendsBar extends Component {
         };
         //console.log(this.props)
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillReceiveProps(nextProps){
@@ -49,8 +50,8 @@ class FriendsBar extends Component {
                 // console.log(this.props.initialFriends[i])
                 let name = ""
                 for (j = 0; j < this.props.users.length; j++){
-                    if(this.props.users[i].uid === this.props.initialFriends[i]){
-                        name = this.props.users[i].firstname;
+                    if(this.props.users[j].uid === this.props.initialFriends[i]){
+                        name = this.props.users[j].firstname;
                         // console.log(name)
                         getNames.push(name)
                         break;
@@ -91,6 +92,11 @@ class FriendsBar extends Component {
         }
     }
 
+    handleSubmit(e){
+        console.log("INSIDE SUBMIT")
+        e.preventDefault();
+    }
+
     toggleFriendsBar() {
         document.getElementById("sidebar").classList.toggle("active");
     }
@@ -123,9 +129,9 @@ class FriendsBar extends Component {
 
     render() {
         // redirect to login page if not logged in
-        if (!this.props.auth.uid) {
-            return <Redirect to="/login" />;
-        }
+        // if (!this.props.auth.uid) {
+        //     return <Redirect to="/login" />;
+        // }
         
         //console.log(this.props)
         // let getNames = []
@@ -166,7 +172,7 @@ class FriendsBar extends Component {
                 <hr id="separate"></hr>
                 <Row>
                     <Col>
-                        <Form>
+                        <Form onSubmit= {this.handleSubmit}>
                             <Form.Control
                             id="searchFriend"
                             placeholder={this.state.currentFunction}

@@ -29,7 +29,7 @@ class Content extends Component {
           {<Line data={this.state.charData} options={charDataOptions} />}
         </div>
       );
-    } else if (randomArg === "dougnut") {
+    } else if (randomArg === "doughnut") {
       return (
         <div
           className="LineGraph"

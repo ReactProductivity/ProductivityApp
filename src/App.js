@@ -3,6 +3,7 @@ import "./App.css";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./components/layout/Navigation";
 import FriendsBar from "./components/layout/FriendsBar";
+import MainContent from "./components/layout/MainContent";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -14,12 +15,12 @@ class App extends React.Component {
         super(props);
     }
     render(){
-    /* this is where we initial friends for user based from database for the logged in user*/
+      // this is the user presence feature
       if (this.props.auth.uid) {
           //console.log(this.props)
           const firebase = getFirebase().database();
           const uid = getFirebase().auth().currentUser.uid;
-          const onlineRef = firebase.ref('.info/connected'); // Get a reference to the list of connections
+          const onlineRef = firebase.ref('.info/connected'); 
 
           var isOfflineForDatabase = {
             state: 'offline',
@@ -35,8 +36,8 @@ class App extends React.Component {
           
             firebase
               .ref(`/status/${uid}`)
-              .onDisconnect() // Set up the disconnect hook
-              .set(isOfflineForDatabase) // The value to be set for this key when the client disconnects
+              .onDisconnect() 
+              .set(isOfflineForDatabase) 
               .then(() => {
                   firebase.ref(`/status/${uid}`).set(isOnlineForDatabase);
               });
@@ -49,7 +50,7 @@ class App extends React.Component {
           <div className="App">
             <Navigation />
             <Switch>
-              <Route exact path="/" component={FriendsBar} />
+              <Route exact path="/" component={MainContent} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
             </Switch>

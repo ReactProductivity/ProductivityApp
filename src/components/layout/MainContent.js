@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { Tabs } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { Tab, Container } from "react-bootstrap";
+import { connect } from "react-redux";
 
 export class MainContent extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export class MainContent extends Component {
   }
 
   render() {
-    if (this.props.auth.uid) {
+    if (!this.props.auth.uid) {
       return <Redirect to="/login" />;
     }
     return (
@@ -34,7 +35,7 @@ export class MainContent extends Component {
               <Content greeting={"bar"} />
             </Tab>
             <Tab eventKey="doughnut" title="Doughnut">
-              <Content greeting={"dougnut"} />
+              <Content greeting={"doughnut"} />
             </Tab>
           </Tabs>
         </Container>
@@ -42,3 +43,12 @@ export class MainContent extends Component {
     );
   }
 }
+
+const mapStatetoProps = (state) => {
+  console.log(state)
+  return {
+      auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStatetoProps)(MainContent)
