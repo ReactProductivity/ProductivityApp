@@ -22,29 +22,25 @@ class Content extends Component {
   renderSomething(randomArg) {
     if (randomArg === "line") {
       return (
-        <div
-          className="LineGraph"
-          style={{ height: "1000px", width: "1000px" }}
-        >
-          {<Line data={this.state.charData} options={charDataOptions} />}
+        <div className="LineGraph">
+          {
+            <Line
+              data={this.state.charData}
+              options={charDataOptions}
+              height={"100px"}
+            />
+          }
         </div>
       );
     } else if (randomArg === "doughnut") {
       return (
-        <div
-          className="LineGraph"
-          style={{ height: "1000px", width: "1000px" }}
-        >
+        <div className="LineGraph">
           {<Doughnut data={this.state.charData} />}
         </div>
       );
     } else {
     }
-    return (
-      <div className="LineGraph" style={{ height: "1000px", width: "1000px" }}>
-        {<Bar data={this.state.charData} />}
-      </div>
-    );
+    return <div>{<Bar data={this.state.charData} />}</div>;
   }
 
   render() {
@@ -58,6 +54,7 @@ class Content extends Component {
 const charDataOptions = {
   responsive: true,
   title: { text: "Hours spent during the last week", display: true },
+  mainmaintainAspectRatio: true,
   scales: {
     yAxes: [
       {

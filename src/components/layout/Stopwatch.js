@@ -29,7 +29,7 @@ class Stopwatch extends Component {
     });
   };
 
-  render () {
+  render() {
     const timerTime = this.state.timerTime;
     let centiseconds = ("0" + (Math.floor(timerTime / 10) % 100)).slice(-2);
     let seconds = ("0" + (Math.floor(timerTime / 1000) % 60)).slice(-2);
@@ -37,7 +37,7 @@ class Stopwatch extends Component {
     let hours = ("0" + Math.floor(timerTime / 3600000)).slice(-2);
     return (
       <div className="Stopwatch">
-        {hours} : {minutes} : {seconds} : {centiseconds}
+        {hours} : {minutes} : {seconds}
         {this.state.timerOn === false && this.state.timerTime === 0 && (
           <Button variant="dark" onClick={this.startTimer}>
             Start
