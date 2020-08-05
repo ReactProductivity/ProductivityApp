@@ -5,6 +5,7 @@ import { Tabs } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { Tab, Container } from "react-bootstrap";
 import { connect } from "react-redux";
+import Stopwatch from "./Stopwatch";
 
 export class MainContent extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export class MainContent extends Component {
     }
     return (
       <div>
-        <FriendsBar  />
+        <FriendsBar />
         <Container>
           <Tabs
             defaultActiveKey="profile"
@@ -39,16 +40,17 @@ export class MainContent extends Component {
             </Tab>
           </Tabs>
         </Container>
+        <Stopwatch />
       </div>
     );
   }
 }
 
 const mapStatetoProps = (state) => {
-  console.log(state)
+  console.log(state);
   return {
-      auth: state.firebase.auth,
+    auth: state.firebase.auth,
   };
 };
 
-export default connect(mapStatetoProps)(MainContent)
+export default connect(mapStatetoProps)(MainContent);
