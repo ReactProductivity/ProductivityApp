@@ -20,23 +20,22 @@ export class MainContent extends Component {
     return (
       <div>
         <FriendsBar />
-        <Stopwatch />
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+        {/* <Tab.Container id="buttons" defaultActiveKey="first">
           <Row>
-            <Col sm={3} id="buttons">
-              <Nav variant="pills" className="flex-column">
+            <Col sm={3} className="buttons">
+              <Nav className="flex-column">
                 <Nav.Item>
-                  <Nav.Link active id="link1" eventKey="first">
+                  <Nav.Link id="first" eventKey="first">
                     Line
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link id="link2" eventKey="second">
+                  <Nav.Link eventKey="second">
                     Bar
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link id="link3" eventKey="third">
+                  <Nav.Link eventKey="third">
                     Doughnut
                   </Nav.Link>
                 </Nav.Item>
@@ -56,29 +55,39 @@ export class MainContent extends Component {
               </Tab.Content>
             </Col>
           </Row>
+        </Tab.Container> */}
+
+        <Tab.Container id="buttons" >
+
         </Tab.Container>
+        {/* <Stopwatch /> */}
 
         {/* <Container>
-          <Tabs
-            defaultActiveKey="profile"
-            id="uncontrolled-tab-example"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            variant={"pills"}
-          >
-            <Tab eventKey="line" title="Line">
-              <Content greeting={"line"} />
-            </Tab>
-            <Tab eventKey="otherline" title="OtherLine">
-              <Content greeting={"bar"} />
-            </Tab>
-            <Tab eventKey="doughnut" title="Doughnut">
-              <Content greeting={"doughnut"} />
-            </Tab>
-          </Tabs>
+          <Row>
+            <Col sm={3}>
+              <Tabs
+                defaultActiveKey="profile"
+                id="uncontrolled-tab-example"
+                className= "flex-column"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                variant={"pills"}
+              >
+                <Tab eventKey="line" title="Line">
+                  <Content greeting={"line"} />
+                </Tab>
+                <Tab eventKey="otherline" title="OtherLine">
+                  <Content greeting={"bar"} />
+                </Tab>
+                <Tab eventKey="doughnut" title="Doughnut">
+                  <Content greeting={"doughnut"} />
+                </Tab>
+              </Tabs>
+            </Col>
+          </Row>
         </Container> */}
       </div>
     );
