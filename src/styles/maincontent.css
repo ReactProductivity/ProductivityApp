@@ -1,20 +1,15 @@
-.buttons {
-  padding-top: 100px;
-  left: 200px;
+.graph-container{
+  /* margin-left: 200px; */
+  background: black;
+}
+
+#main{
+  /* margin-left: 200px; */
+}
+
+
+/* #line-tab{
+  font-family: 'Courier New', Courier, monospace;
+  color: red;
   background: red;
-  top: 150px;
-  
-}
-
-/* .nav-link{
-  margin-bottom: 10px;
-  font-family: 'Courier New', Courier, monospace;
-  background: #c1f0c1;
-  color: black; 
 } */
-
-#first{
-  font-family: 'Courier New', Courier, monospace;
-  background: #c1f0c1;
-  color: black; 
-}

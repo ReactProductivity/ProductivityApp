@@ -99,6 +99,7 @@ class FriendsBar extends Component {
 
     toggleFriendsBar() {
         document.getElementById("sidebar").classList.toggle("active");
+
     }
 
     handleChange(input) {
@@ -146,7 +147,7 @@ class FriendsBar extends Component {
             
         return (
             <>
-            <Container id="sidebar">
+            <Container fluid id="sidebar">
                 <div className="toggle" onClick={this.toggleFriendsBar}>
                     <span></span>
                     <span></span>

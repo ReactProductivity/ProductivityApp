@@ -1,8 +1,8 @@
 #sidebar{
-  position:fixed;
+  position: absolute;
   left: 0px;
-  width:200px;
-  height:100%;
+  width:15%;
+  height: 100vh;
   /* background:#00ff99;  */
   background: #c1f0c1;
 }
@@ -29,7 +29,7 @@
 }
 
 #sidebar.active{
-  left:-200px;
+  left:-15%;
 }
 
 #friendsHeader{
