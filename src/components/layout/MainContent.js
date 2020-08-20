@@ -3,7 +3,16 @@ import Content from "./Content";
 import React, { Component } from "react";
 import { Tabs } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import { Tab, Container, Row, Col, Nav, ToggleButtonGroup, ToggleButton} from "react-bootstrap";
+import {
+  Tab,
+  Container,
+  Row,
+  Col,
+  Nav,
+  ToggleButtonGroup,
+  ToggleButton,
+} from "react-bootstrap";
+import TabBar from "./TabsBar";
 import { connect } from "react-redux";
 import Stopwatch from "./Stopwatch";
 import "../../styles/maincontent.css";
@@ -20,9 +29,9 @@ export class MainContent extends Component {
     }
     return (
       <Container fluid id="main">
-        <FriendsBar/>
-        <Content/>
-        
+        <FriendsBar />
+        <TabBar></TabBar>
+        <Content />
       </Container>
     );
   }
