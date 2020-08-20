@@ -29,9 +29,9 @@ class FriendsBar extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({ friends: nextProps.initialFriends, filtered: nextProps.initialFriends})
-    }   
+    // componentWillReceiveProps(nextProps){
+    //     this.setState({ friends: nextProps.initialFriends, filtered: nextProps.initialFriends})
+    // }   
 
     componentDidMount(){
         // console.log(this.props.initialFriends)
